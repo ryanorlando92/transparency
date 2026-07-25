@@ -1,30 +1,3 @@
-```python
-import pandas as pd
-
-file_path = "fullcsvbackup.csv.xlsx"
-df = pd.read_excel(file_path)
-
-df['Date_Str'] = df['Date'].astype(str)
-df['Date_Parsed'] = pd.to_datetime(df['Date_Str'].str.replace('Sent ', '', regex=False).str.replace('Received ', '', regex=False), errors='coerce')
-
-# Filter for April 29, 2026
-april_29_fight = df[(df['Date_Parsed'].dt.year == 2026) & 
-                    (df['Date_Parsed'].dt.month == 4) & 
-                    (df['Date_Parsed'].dt.day == 29)].copy()
-
-april_29_fight = april_29_fight.sort_values(by='Date_Parsed')
-
-print(f"Number of messages on Apr 29: {len(april_29_fight)}")
-
-# Print messages
-for i, row in april_29_fight.iterrows():
-    sender = "Nathalie" if pd.notna(row['Sender']) and 'Nathalie' in str(row['Sender']) else "User"
-    print(f"[{row['Date_Parsed']}] {sender}: {str(row['Content']).strip()}")
-
-
-```
-
-```text
 Number of messages on Apr 29: 28
 [2026-04-29 08:51:14] User: Im leaving the house at 6:45 tomorrow morning to go golfing before work.
 [2026-04-29 11:29:59] Nathalie: Hey the dishes this morning me woke me up and scared me. What happened there?
