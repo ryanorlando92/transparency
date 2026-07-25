@@ -1,30 +1,3 @@
-```python
-import pandas as pd
-
-file_path = "fullcsvbackup.csv.xlsx"
-df = pd.read_excel(file_path)
-
-df['Date_Str'] = df['Date'].astype(str)
-df['Date_Parsed'] = pd.to_datetime(df['Date_Str'].str.replace('Sent ', '', regex=False).str.replace('Received ', '', regex=False), errors='coerce')
-
-# Filter for April 28, 2026
-april_28_fight = df[(df['Date_Parsed'].dt.year == 2026) & 
-                    (df['Date_Parsed'].dt.month == 4) & 
-                    (df['Date_Parsed'].dt.day == 28)].copy()
-
-april_28_fight = april_28_fight.sort_values(by='Date_Parsed')
-
-print(f"Number of messages on Apr 28: {len(april_28_fight)}")
-
-# Print messages
-for i, row in april_28_fight.iterrows():
-    sender = "Nathalie" if pd.notna(row['Sender']) and 'Nathalie' in str(row['Sender']) else "User"
-    print(f"[{row['Date_Parsed']}] {sender}: {str(row['Content']).strip()}")
-
-
-```
-
-```text
 Number of messages on Apr 28: 49
 [2026-04-28 08:24:26] Nathalie: Genuinely curious what your motive was this morning when you interjected?
 [2026-04-28 08:27:00] User: I've been noticing that Lennon really pushes the limits with you until you have to raise your voice or get strict about a consequence. I feel frustrated watching that happen because I know it’s exhausting for you. The story I'm telling myself is that when we repeat instructions without a consequence, Lennon is learning she doesn't have to take us seriously until we get visibly upset. I want us to be on the same page so we don't have to get exasperated to get her to listen. How are you feeling about how those moments are going?
