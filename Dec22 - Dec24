@@ -1,38 +1,3 @@
-```python
-import pandas as pd
-
-file_path = "fullcsvbackup.csv.xlsx"
-df = pd.read_excel(file_path)
-
-df['Date_Str'] = df['Date'].astype(str)
-df['Date_Parsed'] = pd.to_datetime(df['Date_Str'].str.replace('Sent ', '', regex=False).str.replace('Received ', '', regex=False), errors='coerce')
-
-# Filter for Dec 22 to Dec 24, 2025 (since previous Dec fight was 2025)
-dec_fight_late = df[(df['Date_Parsed'].dt.year == 2025) & 
-                    (df['Date_Parsed'].dt.month == 12) & 
-                    (df['Date_Parsed'].dt.day >= 22) & 
-                    (df['Date_Parsed'].dt.day <= 24)].copy()
-
-dec_fight_late = dec_fight_late.sort_values(by='Date_Parsed')
-
-print(f"Number of messages on Dec 22-24, 2025: {len(dec_fight_late)}")
-
-if len(dec_fight_late) > 0:
-    for i, row in dec_fight_late.iterrows():
-        sender = "Nathalie" if pd.notna(row['Sender']) and 'Nathalie' in str(row['Sender']) else "User"
-        print(f"[{row['Date_Parsed']}] {sender}: {str(row['Content']).strip()}")
-else:
-    # Check if there are any Dec 22-24 messages in 2026 or general
-    print("No messages found for Dec 22-24, 2025. Checking overall dataset for those days:")
-    dec_any = df[(df['Date_Parsed'].dt.month == 12) & (df['Date_Parsed'].dt.day >= 22) & (df['Date_Parsed'].dt.day <= 24)]
-    print(f"Total found across all years: {len(dec_any)}")
-    if len(dec_any) > 0:
-        print(dec_any['Date_Parsed'].dt.year.value_counts())
-
-
-```
-
-```text
 Number of messages on Dec 22-24, 2025: 51
 [2025-12-22 04:48:49] Nathalie: I get being disappointed that the baby is up but to peace out and be unhelpful is crazy.
 [2025-12-22 04:53:08] Nathalie: Feels like you can just have a meltdown to get out of doing anything you want parenting-wise. Yeah it is frustrating that he won’t sleep.. but he’s a baby. You can help one time.
