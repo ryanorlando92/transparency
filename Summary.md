@@ -12,7 +12,7 @@ Historical Absolutism: In the heat of conflict, she utilizes "always" and "never
 
 Rejection of Mutual Blame: Even when discussing shared parenting moments—such as one of the kids getting hurt—the conflict resolution style aggressively resists any shared accountability. The texts show a pattern where any observation you make is interpreted as an attack, prompting her to immediately defend against the idea that anything is her fault, while simultaneously keeping the focus on your perceived failings.
 
-After analyzing the fullcsvbackup.csv.xlsx file, here is an index of how the messages map to the emotional manipulation techniques you listed. While these are patterns identified in the text rather than clinical diagnoses, they clearly align with the definitions of these behaviors:
+After analyzing the transcript file, here is an index of how the messages map to emotional manipulation techniques. While these are patterns identified in the text rather than clinical diagnoses, they clearly align with the definitions of these behaviors:
 
 Covert Intimidation & Guilt Tripping
 
